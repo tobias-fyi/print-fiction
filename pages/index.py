@@ -8,7 +8,12 @@ import plotly.express as px
 from app import app
 
 header1 = html.Div(
-    [html.H1("Welcome to print(fiction)"), html.P("A predictive modeling project by Tobias Reaper")], id="header"
+    [
+        html.Span(className="logo icon solid fa-book-open"),
+        html.H1("Welcome to print(fiction)"),
+        html.P("A predictive modeling project by Tobias Reaper"),
+    ],
+    id="header",
 )
 
 mainDiv = html.Div(
@@ -16,8 +21,10 @@ mainDiv = html.Div(
         html.Header(
             [
                 html.H2("Turn the knobs."),
-                html.H2("Try the dials."),
-                html.H2("Slide the sliders."),
+                html.H3("Try the dials."),
+                html.H4("Slide the sliders."),
+                html.Span(className="logo icon solid fa-cog"),
+                html.Br(),
                 html.P("I dare you..."),
             ],
             className="major container medium",
@@ -89,7 +96,8 @@ mainDiv = html.Div(
                 html.H3("Get shady with data science!"),
                 html.P("See how your prediction stacks up against a machine learning model!"),
                 html.Ul(
-                    [html.Li(html.A("Read like a book", href="#", className="button"))], className="actions special"
+                    [html.Li(html.A("Read like a book", href="#", className="button"))],
+                    className="actions special",
                 ),
             ],
             className="major container medium",
@@ -98,31 +106,7 @@ mainDiv = html.Div(
     className="main",
 )
 
-intro = """
-        ## Is It Fiction?
-
-        🤔 Make a prediction if the book title belongs a fiction or nonfiction book.
-
-        🎯 See how your prediction stacks up against the model!
-        """
-
-
-column1 = dbc.Col(header1, width=12)
-
-column2 = dbc.Col(mainDiv, width=12)
-
-# gapminder = px.data.gapminder()
-# fig = px.scatter(
-#     gapminder.query("year==2007"),
-#     x="gdpPercap",
-#     y="lifeExp",
-#     size="pop",
-#     color="continent",
-#     hover_name="country",
-#     log_x=True,
-#     size_max=60,
-# )
-
-# column2 = dbc.Col([dcc.Graph(figure=fig)])
+column1 = dbc.Col(header1, width=True)
+column2 = dbc.Col(mainDiv, width=True)
 
 layout = dbc.Container([dbc.Row(column1), dbc.Row(column2)], fluid=True)

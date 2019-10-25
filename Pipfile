@@ -15,6 +15,7 @@ plotly = "*"
 pandas = "*"
 dash-renderer = "*"
 dash-html-components = "*"
+dash-daq = "*"
 
 [requires]
 python_version = "3"

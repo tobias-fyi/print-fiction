@@ -9,6 +9,7 @@ from app import app, server
 from pages import index, predictions, insights, process
 
 
+# ====== Navigation ====== #
 nav = html.Ul(
     [
         html.Li(html.A("print(fiction)", href="/", className="nav-link")),
@@ -19,51 +20,7 @@ nav = html.Ul(
     className="nav",
 )
 
-# nav = dbc.Nav(
-#     [
-#         dbc.NavItem(dbc.NavLink("print(fiction)", href="/", className="nav-link")),
-#         dbc.NavItem(dbc.NavLink("Predictions", href="/predictions", className="nav-link")),
-#         dbc.NavItem(dbc.NavLink("Insights", href="/insights", className="nav-link")),
-#         dbc.NavItem(dbc.NavLink("Process", href="/process", className="nav-link")),
-#     ]
-# )
-
-# navbar = dbc.NavbarSimple(
-#     brand="print(fiction)",
-#     brand_href="/",
-#     children=[
-#         dbc.NavItem(dcc.Link("Predictions", href="/predictions", className="nav-link")),
-#         dbc.NavItem(dcc.Link("Insights", href="/insights", className="nav-link")),
-#         dbc.NavItem(dcc.Link("Process", href="/process", className="nav-link")),
-#     ],
-#     sticky="top",
-#     color="dark",
-#     light=False,
-#     dark=True,
-# )
-
-footer = dbc.Container(
-    dbc.Row(
-        dbc.Col(
-            html.P(
-                [
-                    html.Span("Tobias Reaper", className="mr-2"),
-                    html.A(html.I(className="fas fa-envelope-square mr-1"), href="mailto:tobyreaper@gmail.com"),
-                    html.A(
-                        html.I(className="fab fa-github-square mr-1"),
-                        href="https://github.com/tobias-fyi/print-fiction/",
-                    ),
-                    html.A(
-                        html.I(className="fab fa-linkedin mr-1"), href="https://www.linkedin.com/in/tobias-ea-reaper/"
-                    ),
-                    html.A(html.I(className="fab fa-twitter-square mr-1"), href="https://twitter.com/tobiasfyi/"),
-                ],
-                className="lead",
-            )
-        )
-    )
-)
-
+# ====== Footer ====== #
 customFooter = dbc.Container(
     html.Div(
         html.Div(
@@ -72,7 +29,10 @@ customFooter = dbc.Container(
                 html.Ul(
                     [
                         html.Li(
-                            html.A(html.I(className="fas fa-envelope-square mr-1"), href="mailto:tobyreaper@gmail.com")
+                            html.A(
+                                html.I(className="fas fa-envelope-square mr-1"),
+                                href="mailto:tobyreaper@gmail.com",
+                            )
                         ),
                         html.Li(
                             html.A(
@@ -88,7 +48,8 @@ customFooter = dbc.Container(
                         ),
                         html.Li(
                             html.A(
-                                html.I(className="fab fa-twitter-square mr-1"), href="https://twitter.com/tobiasfyi/"
+                                html.I(className="fab fa-twitter-square mr-1"),
+                                href="https://twitter.com/tobiasfyi/",
                             )
                         ),
                     ],
@@ -106,7 +67,13 @@ customFooter = dbc.Container(
 # https://dash.plot.ly/urls #
 
 app.layout = html.Div(
-    [dcc.Location(id="url", refresh=False), nav, dbc.Container(id="page-content", fluid=True), html.Hr(), customFooter]
+    [
+        dcc.Location(id="url", refresh=False),
+        nav,
+        dbc.Container(id="page-content", fluid=True),
+        html.Hr(),
+        customFooter,
+    ]
 )
 
 

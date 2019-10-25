@@ -1,6 +1,10 @@
 # Project-specific
 dox/
 
+# Temporary until I implement my PageBuilder idea
+utils.py
+variates/
+
 # Sub-projects with git repositories
 # ====== that are not git submodules ====== #
 
