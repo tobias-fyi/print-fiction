@@ -96,7 +96,15 @@ mainDiv = html.Div(
                 html.H3("Get shady with data science!"),
                 html.P("See how your prediction stacks up against a machine learning model!"),
                 html.Ul(
-                    [html.Li(html.A("Read like a book", href="#", className="button"))],
+                    [
+                        html.Li(
+                            html.A(
+                                "Read the machine like a book",
+                                href="/predictions",
+                                className="button",
+                            )
+                        )
+                    ],
                     className="actions special",
                 ),
             ],

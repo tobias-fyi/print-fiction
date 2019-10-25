@@ -223,9 +223,13 @@ rowSingle = dbc.Row(plainParagraph2)
 columnFeature = dbc.Col([mainDiv])
 rowFeature = dbc.Row([columnFeature])
 
+# ====== Layout Utils ====== #
+# TODO: utils section for layout functions and snippets
+horizStyle = {"borderWidth": "2px"}
+horizCol = dbc.Container(dbc.Row(dbc.Col(html.Div(html.Hr(style=horizStyle)))))
 
 # ====== Define Layout ====== #
 # Define rows before inserting into layout container list
-layout = dbc.Container([feature, rowSplitDaq, rowSplit, rowFeature], fluid=True)
+layout = dbc.Container([feature, rowSplitDaq, horizCol, rowSplit, rowFeature], fluid=True)
 
 # layout = dbc.Row([column1, column2])
