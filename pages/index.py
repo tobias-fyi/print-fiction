@@ -34,7 +34,7 @@ mainDiv = html.Div(
                 html.Section(
                     [
                         html.A(
-                            [html.Img(src=app.get_asset_url("images/pic01.jpg"))],
+                            [html.Img(src="assets/images/pic01.jpg")],
                             href="#",
                             className="image icon solid fa-signal",
                         ),
@@ -53,7 +53,7 @@ mainDiv = html.Div(
                 html.Section(
                     [
                         html.A(
-                            [html.Img(src=app.get_asset_url("images/pic02.jpg"))],
+                            [html.Img(src="assets/images/pic02.jpg")],
                             href="#",
                             className="image icon solid fa-signal",
                         ),
@@ -72,7 +72,7 @@ mainDiv = html.Div(
                 html.Section(
                     [
                         html.A(
-                            [html.Img(src=app.get_asset_url("images/pic03.jpg"))],
+                            [html.Img(src="assets/images/pic03.jpg")],
                             href="#",
                             className="image icon solid fa-signal",
                         ),
