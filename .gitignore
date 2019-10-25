@@ -2,15 +2,12 @@
 dox/
 
 # Temporary until I implement my PageBuilder idea
-utils.py
+utils/
 variates/
 
 # Sub-projects with git repositories
 # ====== that are not git submodules ====== #
 
-
-# Misc
-node_modules/
 
 # Large / Creative / Visual Files or Dirs
 *.psd
