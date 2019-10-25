@@ -13,10 +13,10 @@ from joblib import load
 import pandas as pd
 
 # Load in dataset
-df = pd.read_csv("assets/must_read_books_009-03.csv")
+df = pd.read_csv("assets/must_read_books_subset.csv")
 
 # Load in scikit-learn RandomForest pipeline
-pipeline = load("assets/rf_pipe.joblib")
+pipeline = load("assets/rf_pipe2.joblib")
 print(f"Pipeline loaded successfuly.")
 
 
@@ -39,17 +39,34 @@ intro_header = html.Div(
 introduction = dbc.Container(
     dcc.Markdown(
         """
-Selfies messenger bag scenester beard four loko.
+> What separates fact from fiction?  
 
-Pinterest shabby chic pug, Truffaut seitan roof party. 
-Tonx pop-up butcher hoodie, 3 wolf moon next level 
-Intelligentsia—Echo Park—fashion axe asymmetrical chillwave. 
-Narwhal iPhone semiotics Marfa Pitchfork paleo keffiyeh 
-try-hard church-key master cleanse normcore banjo Etsy lo-fi.
+As is the case with many things nowadays, more data brings more answers to questions like this one. 
+If not the actual answers, data can at least provide a lens through which these kinds of questions can be explored.
 
-Art party meggings tofu chambray vegan organic stumptown 
-cornhole chia blog biodiesel distillery mlkshk Carles 
-skateboard +1 tattooed selvage sustainable tote bag.
+This project is dedicated to exploring that question as it relates to the printed page - how are our real 
+stories different from our fictional ones?
+
+I am an avid consumer of science-fiction, much of it in book form. Exploring fictional universes and 
+following the storylines that wind through them play very significant roles in my 
+daily inspiration and keep me full of wonder, even in the real world.
+
+For this project, I was curious how much valuable insight I could gather from books from a quantitative perspective, 
+as I am usually viewing them from the perspective of being sucked into and being fully immersed by the stories.
+
+It is difficult to encapsulate and measure much the information that is found within the books by 
+the simple means I had available to me while working on this project. However, there are still plenty of 
+interesting avenues to peruse, and I hope you have fun doing so!
+
+Go ahead and tweak the parameters a bit and watch the resulting predictions. 
+See if you can notice any significant separating factors between nonfiction and fiction books; 
+any patterns that the model may have picked up on.
+
+I go into more detail about the model, the data, and the process later on. But to give a one-sentence overview, 
+the model I trained for this project is a decision-tree-based machine learning model called a Random Forest Classifier.
+
+Thanks to the wonders of the Cloud, this trained model evaluates the parameters in real time, 
+providing its best guess at whether those parameters indicate "nonfiction" or "fiction".
 """
     )
 )
@@ -63,90 +80,82 @@ predict_left = dbc.Col(
     [
         dcc.Markdown(
             """
-            ## Tweak Book Features
+            ## Tweak the Features
             ---
             """
         ),
         dcc.Markdown("""##### **Avg Rating**"""),
         dcc.Slider(
             id="avg-rating",
-            min=5,
-            max=35,
-            step=0.25,
-            value=20,
+            min=1,
+            max=5,
+            step=1,
+            value=4,
             updatemode="drag",
-            marks={n: str(n) for n in range(5, 36, 5)},
+            marks={n: str(n) for n in range(1, 6)},
             className="mb-5",
         ),
-        html.Div(id="avg-rating-slider", style={"textAlign": "center"}),
+        html.Div(id="avg-rating-slider", style={"textAlign": "center"}, className="mb-5"),
         dcc.Markdown("""##### **Number of Ratings**"""),
         dcc.Slider(
             id="num-ratings",
-            min=500,
-            max=40000,
-            step=50,
+            min=1,
+            max=1000000,
+            step=200000,
             value=20000,
             updatemode="drag",
-            marks={
-                500: "$500",
-                5000: "$5,000",
-                10000: "$10,000",
-                15000: "$15,000",
-                20000: "$20,000",
-                25000: "$25,000",
-                30000: "$30,000",
-                35000: "$35,000",
-                40000: "$40,000",
-            },
+            marks={n: str(n) for n in range(0, 1000001, 200000)},
             className="mb-5",
         ),
-        html.Div(id="num-ratings-slider", style={"textAlign": "center"}),
+        html.Div(id="num-ratings-slider", style={"textAlign": "center"}, className="mb-5"),
         dcc.Markdown("""##### **Number of Pages**"""),
         dcc.Slider(
             id="num-pages",
             min=5,
-            max=1800,
-            step=5,
-            value=900,
-            marks={5: "$5", 500: "$500", 1000: "$1,000", 1500: "$1,500", 1800: "$1,800"},
+            max=1006,
+            step=100,
+            value=200,
+            marks={n: str(n) for n in range(5, 1006, 100)},
             className="mb-5",
         ),
-        html.Div(id="num-pages-slider", style={"textAlign": "center"}),
+        html.Div(id="num-pages-slider", style={"textAlign": "center"}, className="mb-5"),
         dcc.Markdown("""##### **Number of Characters in the Title**"""),
         dcc.Slider(
             id="title-char-count",
-            min=10000,
-            max=500000,
-            step=500,
-            value=250000,
+            min=2,
+            max=252,
+            step=25,
+            value=50,
             updatemode="drag",
-            marks={10000: "$10,000", 50000: "$50,000"},
+            marks={n: str(n) for n in range(2, 253, 25)},
             className="mb-5",
         ),
-        html.Div(id="title-char-count-slider", style={"textAlign": "center"}),
+        html.Div(id="title-char-count-slider", style={"textAlign": "center"}, className="mb-5"),
         dcc.Markdown("""##### **Publish Year**"""),
         dcc.Slider(
             id="publish-year",
-            min=5,
-            max=35,
-            step=0.25,
+            min=1900,
+            max=2020,
+            step=20,
             value=20,
             updatemode="drag",
-            marks={n: str(n) for n in range(5, 36, 5)},
+            marks={n: str(n) for n in range(1900, 2021, 20)},
             className="mb-5",
         ),
-        html.Div(id="publish-date-slider", style={"textAlign": "center"}),
-        # dcc.Markdown("""##### **Boolean Features**"""),
-        dcc.Checklist(
-            options=[
-                {"label": "Book has subtitle", "value": 1},
-                {"label": "Book is part of series", "value": 1},
-                {"label": "Title begins with 'The'", "value": 1},
-            ]
-        ),
+        html.Div(id="publish-year-slider", style={"textAlign": "center"}, className="mb-5"),
+    ]
+)
+
+predict_middle = dbc.Col(
+    [
+        dcc.Markdown("""##### Title Begins with 'The'"""),
+        daq.BooleanSwitch(id="the-title", on=False, className="mb-5"),
+        dcc.Markdown("""##### Has Subtitle"""),
+        daq.BooleanSwitch(id="has-subtitle", on=False, className="mb-5"),
+        dcc.Markdown("""##### Part of Series"""),
+        daq.BooleanSwitch(id="in-series", on=False, className="mb-5"),
         # # TODO: Take input of title and use that to get has_subtitle, title_char_length, the_title
-    ],
-    md=6,
+    ]
 )
 
 predict_right = dbc.Col(
@@ -157,24 +166,7 @@ predict_right = dbc.Col(
             ---
             """
         ),
-        daq.Gauge(
-            id="ROI_Gauge",
-            color={
-                "gradient": True,
-                "ranges": {
-                    "red": [-100, 20],
-                    "orange": [20, 40],
-                    "yellow": [40, 60],
-                    "green": [60, 100],
-                },
-            },
-            showCurrentValue=True,
-            units="Cents per Dollar Invested",
-            value=0,
-            min=-100,
-            max=100,
-            size=500,
-        ),
+        dbc.Container(html.Div(html.H3(["print(", html.Span(id="nonfiction-pred"), ")"]))),
     ]
 )
 
@@ -193,17 +185,12 @@ results_header = dbc.Container(
 results_block_1 = dbc.Container(
     dcc.Markdown(
         """
-Selfies messenger bag scenester beard four loko.
+## Data
 
-Pinterest shabby chic pug, Truffaut seitan roof party. 
-Tonx pop-up butcher hoodie, 3 wolf moon next level 
-Intelligentsia—Echo Park—fashion axe asymmetrical chillwave. 
-Narwhal iPhone semiotics Marfa Pitchfork paleo keffiyeh 
-try-hard church-key master cleanse normcore banjo Etsy lo-fi.
-
-Art party meggings tofu chambray vegan organic stumptown 
-cornhole chia blog biodiesel distillery mlkshk Carles 
-skateboard +1 tattooed selvage sustainable tote bag.
+Much of the up-front work on this project was spent on what I've been calling 
+"target practice"—finding a target that is interesting to predict and is actually predictable. 
+This is much more difficult than one would think, particularly with the range of data available 
+nowadays, which vary wildly in quality and topic.
 """
     )
 )
@@ -212,15 +199,13 @@ results_left = dbc.Container(
     html.Section(
         [
             html.A(
-                html.Img(src=app.get_asset_url("images/pic01.jpg")),
-                href="#",
-                className="image icon solid fa-signal",
+                html.Img(src="num_ratings_outliers.png"), href="#", className="image"
             ),
             html.Div(
                 [
-                    html.H3("The Left Thing"),
+                    html.H3("Outliers, Part 1"),
                     html.P(
-                        "Vice XOXO banjo asymmetrical seitan (jean shorts) 3 wolf moon butcher bespoke literally readymade. Authentic VHS semiotics pork belly selvage sriracha salvia Neutra Tumblr."
+                        "This data had some very significant outliers that made visualizing relatioships difficult."
                     ),
                 ],
                 className="content box",
@@ -234,15 +219,13 @@ results_right = dbc.Container(
     html.Section(
         [
             html.A(
-                html.Img(src=app.get_asset_url("images/pic02.jpg")),
-                href="#",
-                className="image icon solid fa-signal",
+                html.Img(src="num_reviews_outliers.png"), href="#", className="image"
             ),
             html.Div(
                 [
-                    html.H3("The Right Thing"),
+                    html.H3("Outliers, Part 2"),
                     html.P(
-                        "Heirloom farm-to-table XOXO tote bag Marfa deep v kale chips messenger bag distillery Thundercats whatever Neutra dreamcatcher crucifix actually Portland Odd Future ennui bespoke biodiesel."
+                        "Filtering out the outliers reduced the size of the dataset by less than 1,000 rows—definitely worth it for the benefit."
                     ),
                 ],
                 className="content",
@@ -255,46 +238,26 @@ results_right = dbc.Container(
 results_block_2 = dbc.Container(
     dcc.Markdown(
         """
-Selfies messenger bag scenester beard four loko.
+Gathering and fully utilizing deep data on textual content such as books is difficult and 
+requires either a lot of time or a lot of computing power. 
+The scope of this project did not extend that far, so I had to get creative with what I had.
 
-Pinterest shabby chic pug, Truffaut seitan roof party. 
-Tonx pop-up butcher hoodie, 3 wolf moon next level 
-Intelligentsia—Echo Park—fashion axe asymmetrical chillwave. 
-Narwhal iPhone semiotics Marfa Pitchfork paleo keffiyeh 
-try-hard church-key master cleanse normcore banjo Etsy lo-fi.
+For some reason, predicting average ratings wasn't particularly interesting to me. 
+After a few false starts I stumbled onto the idea of trying to predict whether a book is 
+fictional or not, and things fell into place after that.
 
-Art party meggings tofu chambray vegan organic stumptown 
-cornhole chia blog biodiesel distillery mlkshk Carles 
-skateboard +1 tattooed selvage sustainable tote bag.
+I engineered a bunch of features in quick succession, most of which I kept after analyzing 
+their permutation importance. 
 """
     )
 )
 
 results_footer = (
     html.Footer(
-        [
-            html.H3("Get shady with data science!"),
-            html.P("See how your prediction stacks up against a machine learning model!"),
-            html.Ul(
-                html.Li(
-                    html.A("Read the machine like a book", href="/#predictions", className="button")
-                ),
-                className="actions special",
-            ),
-        ],
+        html.Img(src="scatterplot_matrix_no_outliers.png"),
         className="major container medium",
     ),
 )
-
-# results = html.Div(
-#     [
-#         results_header,
-#         html.Div(results_block_1, className="box alt container"),
-#         html.Div([results_left, results_right], className="box alt container"),
-#         html.Div(results_footer, className="box alt container"),
-#     ],
-#     className="main",
-# )
 
 
 # ====== Process Components ====== #
@@ -312,17 +275,9 @@ process_header = dbc.Container(
 process_block_1 = dbc.Container(
     dcc.Markdown(
         """
-Selfies messenger bag scenester beard four loko.
-
-Pinterest shabby chic pug, Truffaut seitan roof party. 
-Tonx pop-up butcher hoodie, 3 wolf moon next level 
-Intelligentsia—Echo Park—fashion axe asymmetrical chillwave. 
-Narwhal iPhone semiotics Marfa Pitchfork paleo keffiyeh 
-try-hard church-key master cleanse normcore banjo Etsy lo-fi.
-
-Art party meggings tofu chambray vegan organic stumptown 
-cornhole chia blog biodiesel distillery mlkshk Carles 
-skateboard +1 tattooed selvage sustainable tote bag.
+For some reason, predicting average ratings wasn't particularly interesting to me. 
+After a few false starts I stumbled onto the idea of trying to predict whether a 
+book is fictional or not, and things fell into place after that.
 """
     )
 )
@@ -331,15 +286,15 @@ process_left = dbc.Container(
     html.Section(
         [
             html.A(
-                html.Img(src=app.get_asset_url("images/pic01.jpg")),
+                html.Img(src="perm_import_light.png"),
                 href="#",
                 className="image icon solid fa-signal",
             ),
             html.Div(
                 [
-                    html.H3("The Left Thing"),
+                    html.H3("Permutation Importance"),
                     html.P(
-                        "Vice XOXO banjo asymmetrical seitan (jean shorts) 3 wolf moon butcher bespoke literally readymade. Authentic VHS semiotics pork belly selvage sriracha salvia Neutra Tumblr."
+                        "I engineered a bunch of features in quick succession, most of which I kept after analyzing their permutation importance."
                     ),
                 ],
                 className="content box",
@@ -353,15 +308,15 @@ process_right = dbc.Container(
     html.Section(
         [
             html.A(
-                html.Img(src=app.get_asset_url("images/pic02.jpg")),
+                html.Img(src="num_pages_outliers.png"),
                 href="#",
                 className="image icon solid fa-signal",
             ),
             html.Div(
                 [
-                    html.H3("The Right Thing"),
+                    html.H3("More Outliers"),
                     html.P(
-                        "Heirloom farm-to-table XOXO tote bag Marfa deep v kale chips messenger bag distillery Thundercats whatever Neutra dreamcatcher crucifix actually Portland Odd Future ennui bespoke biodiesel."
+                        "Some books had tens of thousands of pages, rendering most visualizations useless.."
                     ),
                 ],
                 className="content",
@@ -374,17 +329,19 @@ process_right = dbc.Container(
 process_block_2 = dbc.Container(
     dcc.Markdown(
         """
-Selfies messenger bag scenester beard four loko.
+### Choice of model and metrics
 
-Pinterest shabby chic pug, Truffaut seitan roof party. 
-Tonx pop-up butcher hoodie, 3 wolf moon next level 
-Intelligentsia—Echo Park—fashion axe asymmetrical chillwave. 
-Narwhal iPhone semiotics Marfa Pitchfork paleo keffiyeh 
-try-hard church-key master cleanse normcore banjo Etsy lo-fi.
+Predicting whether books are fiction or not is a binary classification problem. 
+For classiciation, the actual value is either True or False, there is no in between. 
+Therefore, optimizing predictive models is very different for classification as compared to 
+linear regression which aim at a continuous target.
 
-Art party meggings tofu chambray vegan organic stumptown 
-cornhole chia blog biodiesel distillery mlkshk Carles 
-skateboard +1 tattooed selvage sustainable tote bag.
+Logistic regression is not as complex as some of the other classification models, 
+yet can usually provide a robust baseline on which to iterate. In my case, an accuracy score of ~65%.
+
+To go beyond the baseline, I chose to use a gradient boosting classifier. 
+Due to some dependency issues at the very end, I ended up having to go back 
+and re-train a Random Forest Classifier.
 """
     )
 )
@@ -406,9 +363,10 @@ intro_column = dbc.Col(introduction, width=True)
 intro_row = dbc.Row([intro_header, intro_column])
 
 predict_header_row = dbc.Container(dbc.Row(dbc.Col(predict_header)))
-predict_column_1 = dbc.Col(predict_left, width=True)
-predict_column_2 = dbc.Col(predict_right, width=True)
-predict_row = dbc.Row([predict_column_1, predict_column_2])
+predict_column_1 = dbc.Col(predict_left, width=5)
+predict_column_2 = dbc.Col(predict_middle, width=4)
+predict_column_3 = dbc.Col(predict_right, width=3)
+predict_row = dbc.Row([predict_column_1, predict_column_2, predict_column_3])
 
 results_header_row = dbc.Container(dbc.Row(dbc.Col(results_header, width=True)))
 results_column_1 = dbc.Col(results_left, width=True)
@@ -442,4 +400,82 @@ layout = dbc.Container(
     ],
     fluid=True,
 )
+
+# ====== Callbacks ====== #
+
+
+@app.callback(Output("avg-rating-slider", "children"), [Input("avg-rating", "value")])
+def avg_rating_output(x):
+    return f"Average Rating: {x}"
+
+
+@app.callback(Output("num-ratings-slider", "children"), [Input("num-ratings", "value")])
+def num_ratings_output(x):
+    return f"# Ratings: {x}"
+
+
+@app.callback(Output("num-pages-slider", "children"), [Input("num-pages", "value")])
+def num_pages_output(x):
+    return f"# Pages: {x}"
+
+
+@app.callback(Output("title-char-count-slider", "children"), [Input("title-char-count", "value")])
+def title_char_count_output(x):
+    return f"# Characters in Book Title: {x}"
+
+
+@app.callback(Output("publish-year-slider", "children"), [Input("publish-year", "value")])
+def publish_year_output(x):
+    return f"Year Published: {x}"
+
+
+@app.callback(
+    Output("nonfiction-pred", "children"),
+    [
+        Input("avg-rating", "value"),
+        Input("num-ratings", "value"),
+        Input("num-pages", "value"),
+        Input("title-char-count", "value"),
+        Input("publish-year", "value"),
+        Input("the-title", "value"),
+        Input("has-subtitle", "value"),
+        Input("in-series", "value"),
+    ],
+)
+def predict(
+    avg_rating,
+    num_ratings,
+    num_pages,
+    title_char_count,
+    publish_year,
+    the_title,
+    has_subtitle,
+    in_series,
+):
+    df = pd.DataFrame(
+        columns=[
+            "avg_rating",
+            "num_ratings",
+            "num_pages",
+            "title_char_count",
+            "publish_year",
+            "the_title",
+            "has_subtitle",
+            "in_series",
+        ],
+        data=[
+            [
+                avg_rating,
+                num_ratings,
+                num_pages,
+                title_char_count,
+                publish_year,
+                the_title,
+                has_subtitle,
+                in_series,
+            ]
+        ],
+    )
+    y_pred = pipeline.predict(df)[0]
+    return "Nonfiction" if y_pred == 0 else "Fiction"
 

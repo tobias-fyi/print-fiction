@@ -13,7 +13,8 @@ from pages import index
 nav = html.Ul(
     [
         html.Li(html.A("print(fiction)", href="/", className="nav-link")),
-        html.Li(html.A("Predict", href="/#predictions", className="nav-link")),
+        html.Li(html.A("Introduction", href="/#introduction", className="nav-link")),
+        html.Li(html.A("Predict", href="/#predict", className="nav-link")),
         html.Li(html.A("Results", href="/#results", className="nav-link")),
         html.Li(html.A("Process", href="/#process", className="nav-link")),
     ],
