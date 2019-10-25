@@ -6,16 +6,16 @@ from dash.dependencies import Input, Output
 
 
 from app import app, server
-from pages import index, predictions, insights, process
+from pages import index
 
 
 # ====== Navigation ====== #
 nav = html.Ul(
     [
         html.Li(html.A("print(fiction)", href="/", className="nav-link")),
-        html.Li(html.A("Predictions", href="/predictions", className="nav-link")),
-        html.Li(html.A("Insights", href="/insights", className="nav-link")),
-        html.Li(html.A("Process", href="/process", className="nav-link")),
+        html.Li(html.A("Predict", href="/#predictions", className="nav-link")),
+        html.Li(html.A("Results", href="/#results", className="nav-link")),
+        html.Li(html.A("Process", href="/#process", className="nav-link")),
     ],
     className="nav",
 )
@@ -81,12 +81,6 @@ app.layout = html.Div(
 def display_page(pathname):
     if pathname == "/":
         return index.layout
-    elif pathname == "/predictions":
-        return predictions.layout
-    elif pathname == "/insights":
-        return insights.layout
-    elif pathname == "/process":
-        return process.layout
     else:
         return dcc.Markdown("## Page not found")
 

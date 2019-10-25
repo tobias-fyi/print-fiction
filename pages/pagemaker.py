@@ -8,13 +8,6 @@ from dash.dependencies import Input, Output
 from app import app
 
 
-from joblib import load
-
-# Load in scikit-learn RandomForest pipeline
-pipeline = load("assets/rf_pipe.joblib")
-print(f"Pipeline loaded successfuly.")
-
-
 headerPred = html.Div(
     [
         html.Span(className="logo icon solid fa-poo-storm"),
@@ -97,7 +90,7 @@ featureRight = dbc.Container(
     )
 )
 
-mainDiv = html.Div(
+results = html.Div(
     [featureTop, html.Div([featureLeft, featureRight], className="box alt container")],
     className="main",
 )
@@ -192,9 +185,25 @@ skateboard +1 tattooed selvage sustainable tote bag.
     )
 )
 
+results_footer = (
+    html.Footer(
+        [
+            html.H3("Get shady with data science!"),
+            html.P("See how your prediction stacks up against a machine learning model!"),
+            html.Ul(
+                html.Li(
+                    html.A("Read the machine like a book", href="/#predictions", className="button")
+                ),
+                className="actions special",
+            ),
+        ],
+        className="major container medium",
+    ),
+)
+
 # ====== DAQ Components ====== #
 
-column1 = dbc.Col(
+predict_left = dbc.Col(
     [
         dcc.Markdown(
             """
@@ -365,11 +374,12 @@ rowFeature = dbc.Row([columnFeature])
 
 # ====== Layout Utils ====== #
 # TODO: utils section for layout functions and snippets
-horizStyle = {"borderWidth": "2px"}
-horizCol = dbc.Container(dbc.Row(dbc.Col(html.Div(html.Hr(style=horizStyle)))))
+line_style = {"borderWidth": "2px"}
+line_column = dbc.Col(html.Div(html.Hr(style=horizStyle)))
 
 # ====== Define Layout ====== #
 # Define rows before inserting into layout container list
 layout = dbc.Container([feature, rowSplitDaq, horizCol, rowSplit, rowFeature], fluid=True)
 
 # layout = dbc.Row([column1, column2])
+
