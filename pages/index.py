@@ -99,7 +99,7 @@ We all like to boost our own narratives just a little bit every now and again.
 
 But in the case of my project, what separates fiction from nonfiction is...
 
-> a several sliders and a few boolean switches.
+> ...several sliders and a few boolean switches.
 
 I go into more detail about the model, the data, and the process later on. But to give a one-sentence overview, 
 the model I trained for this project is a decision-tree-based machine learning model called a Random Forest Classifier.
@@ -107,7 +107,7 @@ the model I trained for this project is a decision-tree-based machine learning m
 Thanks to the wonders of the Cloud, this model was trained on my laptop, and now lives on one or more servers
 somewhere, happily evaluating the tweaking of its parameters in real time. 
 
-Its entire point of existance?
+Its entire point of existence?
 
 To provide its best guess at whether those parameters indicate a nonfiction or fiction book.
 """
