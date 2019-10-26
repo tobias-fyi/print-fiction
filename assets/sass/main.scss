@@ -55,6 +55,11 @@
 		line-height: 1;
 	}
 
+	.nav {
+		display: flex;
+		justify-content: center;
+	}
+
 	ol, ul {
 		list-style:none;
 	}
@@ -1573,3 +1578,7 @@
 			}
 
 	}
+
+#nonfiction-pred {
+	color: _palette(bg);
+}
