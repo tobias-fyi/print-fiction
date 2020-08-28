@@ -38,7 +38,7 @@ main_header = html.Div(
                 ")",
             ]
         ),
-        html.P("A predictive modeling project by Tobias Reaper"),
+        html.P(["A machine learning project by", html.I("Tobias Reaper")]),
     ],
     id="header",
 )
@@ -52,21 +52,20 @@ intro_header = html.Div(
 introduction1 = dbc.Container(
     dcc.Markdown(
         """
-> What separates fact from fiction?  
+As is the case with many things nowadays, more data brings more answers to questions
+like "What separates fact from fiction?" If not the actual answers, data can at least
+provide a lens through which these kinds of questions can be explored in novel ways.
 
-As is the case with many things nowadays, more data brings more answers to questions like this one. 
-If not the actual answers, data can at least provide a lens through which these kinds of 
-questions can be explored in novel ways.
+This project, `print(fiction)` is dedicated to exploring that question as it relates to
+the printed page - how are our real stories different from our fictional ones?
 
-This project, print(fiction) is dedicated to exploring that question as it relates to the printed page - how are our real 
-stories different from our fictional ones?
+I am an avid consumer of science-fiction, much of it in book form. Exploring fictional
+universes and following the storylines that wind through them play very significant
+roles in my daily inspiration and keep me full of wonder, even in the real world.
 
-I am an avid consumer of science-fiction, much of it in book form. Exploring fictional universes and 
-following the storylines that wind through them play very significant roles in my 
-daily inspiration and keep me full of wonder, even in the real world.
-
-For this project, I was curious how much valuable insight I could gather from books using a quantitative perspective, 
-as I am usually viewing them from the perspective of being sucked into and being fully immersed by the stories.
+For this project, I was curious how much valuable insight I could gather from books
+using a quantitative perspective, as I am usually viewing them from the perspective of
+being fully immersed in the stories themselves.
 """
     )
 )
@@ -86,16 +85,18 @@ introduction2 = dbc.Container(
 Well...that depends what kind of model you use.
 
 It could be a gradient; the stories we tell or hear others tell are never 100%
-nonfiction.
-We all like to boost our own narratives just a little bit every now and again.
+nonfiction. We all like to boost our own narratives just a little bit every now and
+again.
 
-But in the case of my project, what separates fiction from nonfiction is...
+But in the case of `print(fiction)`, what separates fiction from nonfiction is...
 
-> ...several sliders and a few boolean switches.
+*...several sliders and a few boolean switches.*
+
+---
 
 I go into more detail about the data, the model, and the process in my portfolio:
 
-> [tobias.fyi - print(fiction)](https://tobias.fyi/workshop/printfiction/)
+### [tobias.fyi - print(fiction)](https://tobias.fyi/workshop/printfiction/)
 
 To give a brief overview, I built a pipeline that scraped and wrangled book metadata
 from GoodReads, which I used to train and validate a series of machine learning models.
