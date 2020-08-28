@@ -13,10 +13,10 @@ from pages import index
 nav = html.Ul(
     [
         html.Li(html.A("print(fiction)", href="/", className="nav-link")),
-        html.Li(html.A("Introduction", href="/#introduction", className="nav-link")),
-        html.Li(html.A("Predict", href="/#predict", className="nav-link")),
-        html.Li(html.A("Data", href="/#data", className="nav-link")),
-        html.Li(html.A("Process", href="/#process", className="nav-link")),
+        # html.Li(html.A("Introduction", href="/#introduction", className="nav-link")),
+        # html.Li(html.A("Predict", href="/#predict", className="nav-link")),
+        # html.Li(html.A("Data", href="/#data", className="nav-link")),
+        # html.Li(html.A("Process", href="/#process", className="nav-link")),
     ],
     className="nav",
 )
@@ -31,8 +31,8 @@ customFooter = dbc.Container(
                     [
                         html.Li(
                             html.A(
-                                html.I(className="fas fa-envelope-square mr-1"),
-                                href="mailto:tobyreaper@gmail.com",
+                                html.I(className="fas fa-globe mr-1"),
+                                href="https://tobias.fyi/",
                             )
                         ),
                         html.Li(
@@ -44,7 +44,7 @@ customFooter = dbc.Container(
                         html.Li(
                             html.A(
                                 html.I(className="fab fa-linkedin mr-1"),
-                                href="https://www.linkedin.com/in/tobias-ea-reaper/",
+                                href="https://www.linkedin.com/in/tobias-reaper/",
                             )
                         ),
                         html.Li(
