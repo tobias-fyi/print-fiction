@@ -1,5 +1,6 @@
 # Project-specific
 dox/
+.vscode/
 
 # Temporary until I implement my PageBuilder idea
 utils/
