@@ -10,16 +10,16 @@ from pages import index
 
 
 # ====== Navigation ====== #
-nav = html.Ul(
-    [
-        html.Li(html.A("print(fiction)", href="/", className="nav-link")),
-        # html.Li(html.A("Introduction", href="/#introduction", className="nav-link")),
-        # html.Li(html.A("Predict", href="/#predict", className="nav-link")),
-        # html.Li(html.A("Data", href="/#data", className="nav-link")),
-        # html.Li(html.A("Process", href="/#process", className="nav-link")),
-    ],
-    className="nav",
-)
+# nav = html.Ul(
+#     [
+#         html.Li(html.A("print(fiction)", href="/", className="nav-link")),
+#         html.Li(html.A("Introduction", href="/#introduction", className="nav-link")),
+#         html.Li(html.A("Predict", href="/#predict", className="nav-link")),
+#         html.Li(html.A("Data", href="/#data", className="nav-link")),
+#         html.Li(html.A("Process", href="/#process", className="nav-link")),
+#     ],
+#     className="nav",
+# )
 
 # ====== Footer ====== #
 customFooter = dbc.Container(
@@ -70,7 +70,7 @@ customFooter = dbc.Container(
 app.layout = html.Div(
     [
         dcc.Location(id="url", refresh=False),
-        nav,
+        # nav,
         dbc.Container(id="page-content", fluid=True),
         html.Hr(),
         customFooter,
