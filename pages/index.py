@@ -269,20 +269,20 @@ predict_column_1 = dbc.Col(predict_left, width=6)
 predict_column_3 = dbc.Col(predict_right, width=6)
 predict_row = dbc.Row([predict_column_1, predict_column_3])
 
-results_header_row = dbc.Container(dbc.Row(dbc.Col(results_header, width=True)))
-results_column_1 = dbc.Col(results_left, width=True)
-results_column_2 = dbc.Col(results_right, width=True)
-results_block_1_row = dbc.Row(dbc.Col(results_block_1))
-results_block_2_row = dbc.Row(dbc.Col(results_block_2))
-results_row = dbc.Row([results_column_1, results_column_2])
+# results_header_row = dbc.Container(dbc.Row(dbc.Col(results_header, width=True)))
+# results_column_1 = dbc.Col(results_left, width=True)
+# results_column_2 = dbc.Col(results_right, width=True)
+# results_block_1_row = dbc.Row(dbc.Col(results_block_1))
+# results_block_2_row = dbc.Row(dbc.Col(results_block_2))
+# results_row = dbc.Row([results_column_1, results_column_2])
 
-process_header_row = dbc.Container(dbc.Row(dbc.Col(process_header, width=True)))
-process_column_1 = dbc.Col(process_left, width=True)
-process_column_2 = dbc.Col(process_right, width=True)
-process_block_1_row = dbc.Row(dbc.Col(process_block_1))
-# process_shap_row = dbc.Row(process_shap)
-process_block_2_row = dbc.Row(dbc.Col(process_block_2))
-process_row = dbc.Row([process_column_1, process_column_2])
+# process_header_row = dbc.Container(dbc.Row(dbc.Col(process_header, width=True)))
+# process_column_1 = dbc.Col(process_left, width=True)
+# process_column_2 = dbc.Col(process_right, width=True)
+# process_block_1_row = dbc.Row(dbc.Col(process_block_1))
+# # process_shap_row = dbc.Row(process_shap)
+# process_block_2_row = dbc.Row(dbc.Col(process_block_2))
+# process_row = dbc.Row([process_column_1, process_column_2])
 
 layout = dbc.Container(
     [
@@ -291,15 +291,15 @@ layout = dbc.Container(
         line_row,
         predict_header_row,
         predict_row,
-        results_header_row,
-        results_block_1_row,
-        results_row,
-        results_block_2_row,
-        process_header_row,
-        process_block_1_row,
-        process_row,
+        # results_header_row,
+        # results_block_1_row,
+        # results_row,
+        # results_block_2_row,
+        # process_header_row,
+        # process_block_1_row,
+        # process_row,
         # process_shap_row,
-        process_block_2_row,
+        # process_block_2_row,
     ],
     fluid=True,
 )
