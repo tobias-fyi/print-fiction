@@ -12,10 +12,7 @@ from app import app
 from joblib import load
 import pandas as pd
 
-# # Load in dataset
-# df = pd.read_csv("assets/must_read_books_subset.csv")
-
-# Load in scikit-learn RandomForest pipeline
+# Load in sklearn Random Forest pipeline
 pipeline = load("assets/rf_pipe2.joblib")
 print(f"Pipeline loaded successfuly.")
 
@@ -38,7 +35,7 @@ main_header = html.Div(
                 ")",
             ]
         ),
-        html.P(["A machine learning project by", html.I("Tobias Reaper")]),
+        html.P(["A machine learning project by ", html.I("Tobias Reaper")]),
     ],
     id="header",
 )
@@ -56,8 +53,8 @@ As is the case with many things nowadays, more data brings more answers to quest
 like "What separates fact from fiction?" If not the actual answers, data can at least
 provide a lens through which these kinds of questions can be explored in novel ways.
 
-This project, `print(fiction)` is dedicated to exploring that question as it relates to
-the printed page - how are our real stories different from our fictional ones?
+print(fiction) is dedicated to exploring that question as it relates to
+the printed page — how are our real stories different from our fictional ones?
 
 I am an avid consumer of science-fiction, much of it in book form. Exploring fictional
 universes and following the storylines that wind through them play very significant
@@ -84,11 +81,11 @@ introduction2 = dbc.Container(
 
 Well...that depends what kind of model you use.
 
-It could be a gradient; the stories we tell or hear others tell are never 100%
+It could also be a gradient: the stories we tell or hear others tell are never 100%
 nonfiction. We all like to boost our own narratives just a little bit every now and
 again.
 
-But in the case of `print(fiction)`, what separates fiction from nonfiction is...
+But in the case of print(fiction), what separates fiction from nonfiction is...
 
 *...several sliders and a few boolean switches.*
 
@@ -96,7 +93,7 @@ But in the case of `print(fiction)`, what separates fiction from nonfiction is..
 
 I go into more detail about the data, the model, and the process in my portfolio:
 
-### [tobias.fyi - print(fiction)](https://tobias.fyi/workshop/printfiction/)
+> ### [tobias.fyi - print(fiction)](https://tobias.fyi/workshop/printfiction/)
 
 To give a brief overview, I built a pipeline that scraped and wrangled book metadata
 from GoodReads, which I used to train and validate a series of machine learning models.
@@ -270,39 +267,8 @@ predict_column_1 = dbc.Col(predict_left, width=6)
 predict_column_3 = dbc.Col(predict_right, width=6)
 predict_row = dbc.Row([predict_column_1, predict_column_3])
 
-# results_header_row = dbc.Container(dbc.Row(dbc.Col(results_header, width=True)))
-# results_column_1 = dbc.Col(results_left, width=True)
-# results_column_2 = dbc.Col(results_right, width=True)
-# results_block_1_row = dbc.Row(dbc.Col(results_block_1))
-# results_block_2_row = dbc.Row(dbc.Col(results_block_2))
-# results_row = dbc.Row([results_column_1, results_column_2])
-
-# process_header_row = dbc.Container(dbc.Row(dbc.Col(process_header, width=True)))
-# process_column_1 = dbc.Col(process_left, width=True)
-# process_column_2 = dbc.Col(process_right, width=True)
-# process_block_1_row = dbc.Row(dbc.Col(process_block_1))
-# # process_shap_row = dbc.Row(process_shap)
-# process_block_2_row = dbc.Row(dbc.Col(process_block_2))
-# process_row = dbc.Row([process_column_1, process_column_2])
-
 layout = dbc.Container(
-    [
-        main_header,
-        intro_row,
-        line_row,
-        predict_header_row,
-        predict_row,
-        # results_header_row,
-        # results_block_1_row,
-        # results_row,
-        # results_block_2_row,
-        # process_header_row,
-        # process_block_1_row,
-        # process_row,
-        # process_shap_row,
-        # process_block_2_row,
-    ],
-    fluid=True,
+    [main_header, intro_row, line_row, predict_header_row, predict_row], fluid=True
 )
 
 # ====== Callbacks ====== #
